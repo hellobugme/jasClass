@@ -7,7 +7,7 @@ Use JavaScript Class like ActionScript
 
 ## Example
 
-```actionscript
+```javascript
 (function(){
     window.myClass = { demo : {} }; // namespace
     var Package = me.hellobug.Package,
