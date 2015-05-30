@@ -31,7 +31,8 @@
 
     // 创建子类
     Class("Bb").Extends(Papa)(function(name, age){
-        this.Super.Constructor(name, age);
+        // console.log(this);
+        this.Super(name, age);
 
         var proto = Bb.prototype;
         if(typeof proto.work !== "function"){
@@ -40,7 +41,7 @@
                 console.log(this.name + " is working");
             };
             proto.laugh = function(count){
-                this.Super.laugh();
+                this.Super();
                 var str = this.name + ":2";
                 while(count--) str += "3";
                 console.log(str);
@@ -50,7 +51,7 @@
 
     // 创建孙类
     Class("Gb").Extends(Bb)(function(name, age){
-        this.Super.Constructor(name, age);
+        this.Super(name, age);
 
         var proto = Gb.prototype;
         if(typeof proto.cry !== "function"){
@@ -59,7 +60,7 @@
                 console.log("55555555~");
             };
             proto.laugh = function(){
-                // this.Super.laugh(4);
+                // this.Super(4);
                 console.log(this.name + ":44444444~");
             };
         }

@@ -62,7 +62,7 @@
     Package(me.hellobug)
     .Class("Model")
     .Extends(me.hellobug.EventDispatcher)(function(){
-        this.Super.Constructor();
+        this.Super();
         var proto = this.nameSpace[this.className].prototype;
         if(typeof proto.addData !== "function"){
             /**

@@ -3,7 +3,7 @@
 Use JavaScript Class like ActionScript
 
 * Author : Kainan Hong <<1037714455@qq.com>>
-* Source : https://github.com/hellobugme/jsclass/
+* Source : https://github.com/hellobugme/jasclass/
 
 ## Example
 
@@ -36,7 +36,7 @@ Use JavaScript Class like ActionScript
  // Class("myClass.demo.ClassB").Extends("myClass.demo.ClassA")(funciton(name){
     Package(myClass.demo).Class("ClassB").Extends(myClass.demo.ClassA)(funciton(name){
         // call the super class's constructor
-        this.Super.Constructor(name);
+        this.Super(name);
 
         //... override super class's public members, or create new members
     })
