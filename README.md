@@ -24,8 +24,8 @@ Use JavaScript Class like ActionScript
 
         // ptototype member
         var Person = demo.myclasses.Person;
-        if(!Person._ptoto){
-            Person._proto = true;
+        if(!Person._ptotoed){
+            Person._protoed = true;
             var proto = Person.prototype;
             proto.sayHi = function(){
                 //...
