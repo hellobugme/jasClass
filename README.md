@@ -9,13 +9,13 @@ Use JavaScript Class like ActionScript
 
 ```javascript
 (function(){
-    window.myClass = { demo : {} }; // namespace
+    window.demo = { myclasses : {} }; // namespace
     var Package = me.hellobug.Package,
         Class = me.hellobug.Class;
 
- // Package("myClass.demo").Class("ClassA")(funciton(name){
- // Class("myClass.demo.ClassA")(funciton(name){
-    Package(myClass.demo).Class("ClassA")(funciton(name){
+ // Class("demo.myclasses.Person")(funciton(name){
+ // Package("demo.myclasses").Class("Person")(funciton(name){
+    Package(demo.myclasses).Class("Person")(funciton(name){
         // privileged member
         this.name = name;
         //... other privileged members
@@ -23,18 +23,20 @@ Use JavaScript Class like ActionScript
         // note: don't use private members in prototype
 
         // ptototype member
-        var proto = this.nameSpace[this.className].prototype;
-        if(typeof proto.particularMothed != "function"){
-            proto.particularMothed = function(){
-                //Do something
+        var Person = demo.myclasses.Person;
+        if(!Person._ptoto){
+            Person._proto = true;
+            var proto = Person.prototype;
+            proto.sayHi = function(){
+                //...
             };
             //... other prototype members
         }
     })
 
- // Package("myClass.demo").Class("ClassB").Extends("myClass.demo.ClassA")(funciton(name){
- // Class("myClass.demo.ClassB").Extends("myClass.demo.ClassA")(funciton(name){
-    Package(myClass.demo).Class("ClassB").Extends(myClass.demo.ClassA)(funciton(name){
+ // Class("demo.myclasses.User").Extends("demo.myclasses.Person")(funciton(name, password){
+ // Package("demo.myclasses").Class("User").Extends("demo.myclasses.Person")(funciton(name, password){
+    Package(demo.myclasses).Class("User").Extends(demo.myclasses.Person)(funciton(name, password){
         // call the super class's constructor
         this.Super(name);
 

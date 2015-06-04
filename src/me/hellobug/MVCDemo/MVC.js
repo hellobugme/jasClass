@@ -12,8 +12,11 @@
     Package(me.hellobug)
     .Class("EventDispatcher")(function(){
         this.listeners = {};
-        var proto = this.nameSpace[this.className].prototype;
-        if(typeof proto.addEventListener !== "function"){
+
+        var EventDispatcher = me.hellobug.EventDispatcher;
+        if(!EventDispatcher._protoed){
+            EventDispatcher._protoed = true;
+            var proto = EventDispatcher.prototype;
             proto.addEventListener = function(type, listener){
                 if(typeof this.listeners[type] === "undefined"){
                     this.listeners[type] = [];
@@ -63,8 +66,11 @@
     .Class("Model")
     .Extends(me.hellobug.EventDispatcher)(function(){
         this.Super();
-        var proto = this.nameSpace[this.className].prototype;
-        if(typeof proto.addData !== "function"){
+
+        var Model = me.hellobug.Model;
+        if(!Model._protoed){
+            Model._protoed = true;
+            var proto = Model.prototype;
             /**
              * @param {String}  key         数据名
              * @param {*}       value       数据值
@@ -101,8 +107,11 @@
     .Class("View")(function(model){
         this.model = model;
         this.listeners = [];
-        var proto = this.nameSpace[this.className].prototype;
-        if(typeof proto.addListener !== "function"){
+        
+        var View = me.hellobug.View;
+        if(!View._protoed){
+            View._protoed = true;
+            var proto = View.prototype;
             proto.addListener = function(eventName, eventHandle){
                 this.model.addEventListener(eventName, listener);
                 this.listeners.push([eventName, eventHandle, listener]);

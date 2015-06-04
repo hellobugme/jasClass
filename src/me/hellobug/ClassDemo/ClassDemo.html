@@ -1,93 +1,79 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8">
     <title>ClassDemo</title>
 </head>
 <body>
 <script src="../jasClass.js"></script>
 <script>
 (function(){
-    var Class = me.hellobug.Class;
+    var Package = me.hellobug.Package;
 
-    // 创建超类
-    Class("Papa")(function(name, age){
+    // 父类
+    Package("demo.myclasses").Class("Person")(function(name){
         this.name = name;
-        this.age = age;
-        this.friends = [];
 
-        var proto = Papa.prototype;
-        if(typeof proto.sayHi !== "function"){
+        var Person = demo.myclasses.Person;
+        if(!Person._protoed){
+            Person._protoed = true;
+            var proto = Person.prototype;
+            proto.getName = function(){
+                return this.name;
+            };
             proto.sayHi = function(){
-                console.log("Hi, my name is " + this.name + ", I am " + this.age + " years old.");
-            };
-            proto.laugh = function(){
-                console.log(this.name + ":hehehehe~");
-            };
-            proto.enjoy = function(){
-                console.log(this.name + " is enjoying");
+                alert("Hi, I'm " + this.name);
             };
         }
     });
 
-    // 创建子类
-    Class("Bb").Extends(Papa)(function(name, age){
-        // console.log(this);
-        this.Super(name, age);
+    // 子类
+    Package("demo.myclasses").Class("User").Extends("demo.myclasses.Person")(function(name, password){
+        this.Super(name);
+        this.password = password;
 
-        var proto = Bb.prototype;
-        if(typeof proto.work !== "function"){
-            proto.enjoy = null;
-            proto.work = function(){
-                console.log(this.name + " is working");
+        var User = demo.myclasses.User;
+        if(!User._protoed){
+            User._protoed = true;
+            var proto = User.prototype;
+            proto.getPassword = function(){
+                return this.password;
             };
-            proto.laugh = function(count){
+        }
+    });
+
+    // 孙类
+    Package("demo.myclasses").Class("Vip").Extends("demo.myclasses.User")(function(name, password, level){
+        this.Super(name, password);
+        this.level = level;
+
+        var Vip = demo.myclasses.Vip;
+        if(!Vip._protoed){
+            Vip._protoed = true;
+            var proto = Vip.prototype;
+            proto.getLevel = function(){
+                return this.level;
+            };
+            proto.sayHi = function(){
                 this.Super();
-                var str = this.name + ":2";
-                while(count--) str += "3";
-                console.log(str);
+                alert("My vip level is " + this.level);
             };
         }
     });
 
-    // 创建孙类
-    Class("Gb").Extends(Bb)(function(name, age){
-        this.Super(name, age);
-
-        var proto = Gb.prototype;
-        if(typeof proto.cry !== "function"){
-            proto.work = null;
-            proto.cry = function(){
-                console.log("55555555~");
-            };
-            proto.laugh = function(){
-                // this.Super(4);
-                console.log(this.name + ":44444444~");
-            };
-        }
-    });
-
-    var ivan = new Papa("ivan", 55);
-    var bean = new Papa("bean", 54);
-    var ivanb = new Bb("ivanb", 28);
-    var ivang = new Gb("ivangb", 2);
-    ivan.sayHi();
-    bean.enjoy();
-    ivanb.work();
-    ivang.laugh();
-    // ivang.work();
-    
-    // ivan.friends.push("bean");
-    // ivanb.friends.push("beanb");
-    // console.log(ivan.friends);
-    // console.log(ivanb.friends);
-
-    // console.log(ivanb instanceof Bb);
-    // console.log(ivanb instanceof Papa);
-    // console.log(ivanb.constructor === Bb);
-    // console.log(ivanb.constructor === Papa);
-    // alert(ivanb);
-
-    console.log(Gb.prototype);
+    var Person = demo.myclasses.Person,
+        User = demo.myclasses.User,
+        Vip = demo.myclasses.Vip;
+    var zhangsan = new demo.myclasses.User("张三", "123456"),
+        lisi = new Vip("李四", "222222", "8");
+    // alert(zhangsan.getPassword());
+    lisi.sayHi();
+    // alert(lisi instanceof Vip);
+    // alert(lisi instanceof Person);
+    // alert(lisi.constructor === Vip);
+    // alert(lisi.constructor === Person);
+    // alert(lisi);
+    // alert(Vip.prototype);
 })();
 </script>
 </body>
