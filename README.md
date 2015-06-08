@@ -35,7 +35,7 @@ Use JavaScript Class like ActionScript
     Package(demo.myclasses).Class("User").Extends(demo.myclasses.Person)(funciton(User, Super){
         User.Constructor = function(name, password){
             // call the super class's constructor
-            Super(name);
+            Super.Constructor.call(this, name);
         }
 
         //... override super class's public members, or create new members
